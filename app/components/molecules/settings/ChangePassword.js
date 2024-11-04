@@ -21,8 +21,9 @@ const ChangePassword = ({ goBack }) => {
     e.preventDefault();
     const val = serialize(e.target)
     if (val.new_password === val.comfirm_password) {
-      const { status, data } = await changePassword().catch(err => console.log(err))
+      const { status, data } = await changePassword(val).catch(err => console.log(err))
       if (status) {
+        e.target.reset()
         // console.log(data);
       } else {
         setFormError(data.message)

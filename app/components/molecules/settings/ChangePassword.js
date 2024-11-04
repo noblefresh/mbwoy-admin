@@ -45,7 +45,7 @@ const ChangePassword = ({ goBack }) => {
       </div>
       <div className="px-4 md:px-0 text-danger text-sm">{formError}</div>
       <div className="px-4 space-y-6 pt-5 flex-grow md:px-0 md:w-[65%]">
-        <AppInput type={"password"} onChange={(e) => setDisabled(false)} label={"Current Password"} required name={"current_password"} />
+        <AppInput type={"password"} onChange={(e) => setDisabled(false)} label={"Current Password"} required name={"old_password"} />
         <AppInput type={"password"} onChange={(e) => setDisabled(false)} label={"New Password"} required name={"new_password"} />
         <AppInput type={"password"} onChange={(e) => setDisabled(false)} label={"Comfirm Password"} required name={"comfirm_password"} />
       </div>

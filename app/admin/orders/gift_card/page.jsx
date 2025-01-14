@@ -12,6 +12,7 @@ import ResponseModal from '@/app/components/organisms/ResponseModal'
 import axios from 'axios'
 import { API_BASE_URL, TOKEN } from '@/app/services/httpService'
 import { MdOutlineFileCopy } from 'react-icons/md'
+import Image from 'next/image'
 
 function Page() {
   const [loading, setLoading] = useState(true)
@@ -31,6 +32,8 @@ function Page() {
     if (status) {
       setcate(data.data[0]);
     }
+    console.log(data);
+
     fetchSummary()
     setLoading(false)
   }
@@ -128,6 +131,17 @@ function Page() {
                       <div className='text-gray-500'>{x?.card?.name}</div>
                     </div>
                     <div className=''>
+                      <div className='font-bold'>Card:</div>
+                      <div className='text-gray-500'>
+                        <div className="flex items-center gap-1">
+                          <div className="w-8 bg-gray-100 rounded-full overflow-hidden h-8">
+                            <Image src={x?.card?.giftcard_category?.image} className='w-full h-full' width={100} height={100} />
+                          </div>
+                          <div className="">{x?.card?.giftcard_category?.name}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className=''>
                       <div className='font-bold'>Sell rate low:</div>
                       <div className='text-gray-500'>&#8358;{Number(x?.card?.sell_rate_low).toLocaleString('en-US')}</div>
                     </div>
@@ -195,6 +209,7 @@ function Page() {
           <thead>
             <tr>
               <th className='bg-black px-3 py-2 rounded-tl-lg rounded-tr-lg sm:rounded-tr-none text-left text-white' scope="">Username</th>
+              <th className='bg-black px-3 py-2 text-left text-white hidden sm:table-cell' scope="">Name</th>
               <th className='bg-black px-3 py-2 text-left text-white hidden sm:table-cell' scope="">Type</th>
               <th className='bg-black px-3 py-2 text-left text-white hidden lg:table-cell' scope="">Amount</th>
               <th className='bg-black px-3 py-2 text-left text-white hidden lg:table-cell' scope="">Rate</th>
@@ -220,6 +235,14 @@ function Page() {
                         <div className={`text-[9px] px-3 inline py-[2px] rounded-lg bg-opacity-10 ${data.status === "success" ? "text-success bg-success" : data.status === "rejected" ? "text-danger bg-danger" : "text-yellow bg-yellow"}`}>{data.status}</div>
                       </div>
                       <div onClick={() => { setId(data.id); setX(data) }} className="w-7 h-7 cursor-pointer rounded-md text-black flex items-center justify-center bg-gray-200 "><PiFingerprintSimpleThin /></div>
+                    </div>
+                  </td>
+                  <td className='px-3 py-2 text-left capitalize hidden sm:table-cell' scope="">
+                    <div className="flex items-center gap-1">
+                      <div className="w-8 bg-gray-100 rounded-full overflow-hidden h-8">
+                        <Image src={data?.card?.giftcard_category?.image} className='w-full h-full' width={100} height={100} />
+                      </div>
+                      <div className="">{data?.card?.giftcard_category?.name}</div>
                     </div>
                   </td>
                   <td className='px-3 py-2 text-left capitalize hidden sm:table-cell' scope="">{data.type}</td>

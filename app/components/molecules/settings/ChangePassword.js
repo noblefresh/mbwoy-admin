@@ -1,13 +1,5 @@
 import { useState } from "react";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-// import { BiLockOpen } from "react-icons/bi";
 import { FaAngleLeft } from "react-icons/fa6";
-// import { changePassword } from "../../apis/services/authService";
-// import { addData } from "../../reduxStore/reducers/UsersReducer";
-// import Cookies from "js-cookie";
-// import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import UseFormHandler from "@/app/hooks/useFormHandler";
 import AppInput from "../../organisms/AppInput";
 import { changePassword } from "@/app/services/authService";
 import serialize from "@/app/hooks/Serialize";
@@ -15,7 +7,6 @@ import serialize from "@/app/hooks/Serialize";
 const ChangePassword = ({ goBack }) => {
   const [disable, setDisabled] = useState(true)
   const [formError, setFormError] = useState("")
-  const dispatch = useDispatch()
 
   const changeNow = async (e) => {
     e.preventDefault();
@@ -24,7 +15,6 @@ const ChangePassword = ({ goBack }) => {
       const { status, data } = await changePassword(val).catch(err => console.log(err))
       if (status) {
         e.target.reset()
-        // console.log(data);
       } else {
         setFormError(data.message)
       }

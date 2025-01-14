@@ -99,7 +99,7 @@ function Page() {
                     ))
                   }
                 </div>
-                <Link href="/admin/orders/gift_card"><div className="bg-yellow text-center py-2 rounded-lg">View All</div></Link>
+                <Link href="/admin/orders/crypto"><div className="bg-yellow text-center py-2 rounded-lg">View All</div></Link>
               </div>
             </div>
           </div>

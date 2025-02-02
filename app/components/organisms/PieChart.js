@@ -1,9 +1,10 @@
 "use client";
 import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function PieChart({ labels, series }) {
   const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+
   const [chart, setChartData] = useState({
     options: {
       plotOptions: {
@@ -30,7 +31,7 @@ function PieChart({ labels, series }) {
         "#9C27B0",
       ],
       dataLabels: {
-        enabled: false,
+        enabled: true,
       },
       legend: {
         position: "top",
@@ -47,6 +48,13 @@ function PieChart({ labels, series }) {
     ],
     series,
   });
+
+  useEffect(() => {
+    setChartData(prv => ({ ...prv, series }))
+  }, [series])
+
+
+
   return (
     <div className="donut">
       {typeof window !== "undefined" && (

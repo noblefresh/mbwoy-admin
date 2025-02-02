@@ -28,7 +28,7 @@ function Page() {
   
 
   return (
-    <AppLayout title={"Here`s today`s summary of your hiring process"}>
+    <AppLayout title={"Here`s the summary of all activities"}>
       <div className="grid lg:grid-cols-3 gap-5">
         <div className="lg:col-span-2 space-y-5">
           <div className="grid sm:grid-cols-3 gap-5">
@@ -99,7 +99,7 @@ function Page() {
                     ))
                   }
                 </div>
-                <Link href="/admin/orders/gift_card"><div className="bg-yellow text-center py-2 rounded-lg">View All</div></Link>
+                <Link href="/admin/orders/crypto"><div className="bg-yellow text-center py-2 rounded-lg">View All</div></Link>
               </div>
             </div>
           </div>

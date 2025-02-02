@@ -1,6 +1,6 @@
 import React from 'react'
 
-function AppCard({ color, bg, text, icon, figure }) {
+function AppCard({ color, bg, text, icon, figure ,withNairaSign}) {
     return (
         <div className='bg-white px-5 space-y-1 py-6 rounded-lg'>
             <div>
@@ -14,10 +14,9 @@ function AppCard({ color, bg, text, icon, figure }) {
                 figure?.toLocaleString('en-US') === undefined ? (
                     <div className='preload w-7 h-7'></div>
                 ) : (
-                    <div className='text-3xl font-bold'>{figure?.toLocaleString('en-US')}</div>
+                    <div className='text-3xl font-bold'>{withNairaSign && "₦"}{figure?.toLocaleString('en-US')}</div>
                 )
             }
-            
         </div>
     )
 }

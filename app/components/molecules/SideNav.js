@@ -4,6 +4,7 @@ import AppLink from "../organisms/AppLink";
 import logo from "@assets/images/viloxLogo.png"
 import { TbUserCircle } from "react-icons/tb";
 import { IoEllipsisVerticalOutline } from "react-icons/io5";
+import { TfiStatsUp } from "react-icons/tfi";
 import { CiPower } from "react-icons/ci";
 import Modal from "../organisms/Modal";
 import { SignOut } from "@/app/hooks/Auth";
@@ -34,6 +35,10 @@ function SideNav({ user }) {
             <AppLink
               text={"dashboard"}
               icon={<i className="ri-layout-grid-fill"></i>}
+            />
+            <AppLink
+              text={"revenue"}
+              icon={<TfiStatsUp />}
             />
             <AppLink
               text={"orders"}

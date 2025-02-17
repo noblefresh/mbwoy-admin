@@ -16,7 +16,6 @@ module.exports = {
         blackText: "#0F0F0F",
         paraText: '#373737',
         lightText: '#EFEFEF',
-
         footerBg: '#1e1e1e1a',
         inputBg: '#CBCBCB'
       },

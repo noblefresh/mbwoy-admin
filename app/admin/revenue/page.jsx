@@ -24,6 +24,7 @@ function Page() {
     if (status) {
       setSummary(prv => ({ ...prv, crypto: data.data }))
     }
+    console.log(summary);
   }
   const fetchgiftcardRevenue = async () => {
     const { status, data } = await giftcardRevenue()
@@ -73,13 +74,12 @@ function Page() {
           <div className="p-5 font-bold text-lg">Crypto Transaction Summary</div>
           <div className="">
             {
-              !loading &&
-              <PieChart series={
-                activeTab === "all" ? [234532, 23463] :
-                  activeTab === "daily" ? [6723, 4376] :
-                    activeTab === "weekly" ? [7432, 345724] :
-                      [34645, 5624]
-              } labels={["Total Payment", "Total Debt"]} />
+              !loading && (
+                activeTab === "all" ? <PieChart series={[summary?.crypto?.all?.success_orders, summary?.crypto?.all?.rejected_orders]} labels={["Total Payment", "Total Debt"]} /> :
+                  activeTab === "daily" ? <PieChart series={[summary?.crypto?.daily?.daily_success_orders, summary?.crypto?.daily?.daily_rejected_orders]} labels={["Total Payment", "Total Debt"]} /> :
+                    activeTab === "weekly" ? <PieChart series={[summary?.crypto?.weekly?.weekly_success_orders, summary?.crypto?.weekly?.weekly_rejected_orders]} labels={["Total Payment", "Total Debt"]} /> :
+                      <PieChart series={[summary?.crypto?.monthly?.monthly_success_orders, summary?.crypto?.monthly?.monthly_rejected_orders]} labels={["Total Payment", "Total Debt"]} />
+              )
             }
           </div>
         </div>
@@ -87,13 +87,12 @@ function Page() {
           <div className="p-5 font-bold text-lg">Gift Card Transaction Summary</div>
           <div className="">
             {
-              !loading &&
-              <PieChart series={
-                activeTab === "all" ? [234532, 23463] :
-                  activeTab === "daily" ? [6723, 4376] :
-                    activeTab === "weekly" ? [7432, 345724] :
-                      [34645, 5624]
-              } labels={["Total Payment", "Total Debt"]} />
+              !loading && (
+                activeTab === "all" ? <PieChart series={[summary?.giftCard?.all?.success_orders, summary?.giftCard?.all?.rejected_orders]} labels={["Total Payment", "Total Debt"]} /> :
+                  activeTab === "daily" ? <PieChart series={[summary?.giftCard?.daily?.daily_success_orders, summary?.giftCard?.daily?.daily_rejected_orders]} labels={["Total Payment", "Total Debt"]} /> :
+                    activeTab === "weekly" ? <PieChart series={[summary?.giftCard?.weekly?.weekly_success_orders, summary?.giftCard?.weekly?.weekly_rejected_orders]} labels={["Total Payment", "Total Debt"]} /> :
+                      <PieChart series={[summary?.giftCard?.monthly?.monthly_success_orders, summary?.giftCard?.monthly?.monthly_rejected_orders]} labels={["Total Payment", "Total Debt"]} />
+              )
             }
           </div>
         </div>
@@ -101,13 +100,12 @@ function Page() {
           <div className="p-5 font-bold text-lg">General Transaction Summary</div>
           <div className="">
             {
-              !loading &&
-              <PieChart series={
-                activeTab === "all" ? [234532, 23463] :
-                  activeTab === "daily" ? [6723, 4376] :
-                    activeTab === "weekly" ? [7432, 345724] :
-                      [34645, 5624]
-              } labels={["Total Payment", "Total Debt"]} />
+              !loading && (
+                activeTab === "all" ? <PieChart series={[summary?.transaction?.all?.total_payment, summary?.transaction?.all?.total_debit]} labels={["Total Payment", "Total Debt"]} /> :
+                  activeTab === "daily" ? <PieChart series={[summary?.transaction?.daily?.daily_success_payment, summary?.transaction?.daily?.daily_success_debit]} labels={["Total Payment", "Total Debt"]} /> :
+                    activeTab === "weekly" ? <PieChart series={[summary?.transaction?.weekly?.weekly_success_payment, summary?.transaction?.weekly?.weekly_success_debit]} labels={["Total Payment", "Total Debt"]} /> :
+                      <PieChart series={[summary?.transaction?.monthly?.monthly_success_payment, summary?.transaction?.monthly?.monthly_success_debit]} labels={["Total Payment", "Total Debt"]} />
+              )
             }
           </div>
         </div>

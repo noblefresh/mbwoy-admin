@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import AppLayout from '@component/layouts/appLayout'
 import AppCard from '@/app/components/organisms/AppCard'
-import { fetchAUser, fetchUsers, suspendUsers, unsuspendUsers, usersSummary } from '@/app/services/authService'
+import { fetchAUser, fetchUsers, fundAUser, suspendUsers, unsuspendUsers, usersSummary } from '@/app/services/authService'
 import { TbEye } from 'react-icons/tb'
 import Modal from '@/app/components/organisms/Modal'
 import serialize from '@/app/hooks/Serialize'
@@ -19,7 +19,9 @@ function Page() {
   const [loading, setLoading] = useState(true)
   const [processing, setProcessing] = useState(false)
   const [x, setX] = useState({})
+  const [proccessing, setProccessing] = useState(false)
   const [xter, setXter] = useState({})
+  const [topUpUser, setTopUpUser] = useState({})
   const [summary, setSummary] = useState([])
   const [alertMsg, setAlert] = useState(false)
   const [alertMsgData, setAlertData] = useState(false)
@@ -33,6 +35,10 @@ function Page() {
     setLoading(false)
   }
 
+
+  const showTopUpForm = (val) => {
+    setTopUpUser(val)
+  }
 
   const fetchTheUser = async () => {
     const { status, data } = await fetchAUser({ id: x.wallet.user_id }).catch(err => console.log(err))
@@ -70,9 +76,26 @@ function Page() {
       setAlert(true)
       setAlertData(data)
     }
-
     setProcessing(false)
   }
+
+
+  const topUpUserAccount = async (e) => {
+    e.preventDefault();
+    console.log(e);
+    setProccessing(true)
+    const payload = serialize(e.target)
+    const { status, data } = await fundAUser(payload).catch(err => console.log(err))
+    if (status) {
+      fetch()
+      setTopUpUser({})
+    }
+    setAlert(true)
+    setAlertData(data)
+    setProccessing(false)
+  }
+
+
 
   const fetchSummary = async () => {
     const { status, data } = await usersSummary().catch(err => console.log(err))
@@ -171,6 +194,33 @@ function Page() {
           </Modal>
         )
       }
+
+
+      {
+        Object.keys(topUpUser).length > 0 && (
+          <Modal closeModal={() => setTopUpUser({})} size={"sm"} isOpen={Object.keys(topUpUser).length > 0}>
+            <form onSubmit={(e) => topUpUserAccount(e)} className="space-y-4">
+              <div className="flex-grow flex items-center gap-2">
+                <div className="">
+                  <div className="w-8 bg-gray-100 rounded-full h-8"></div>
+                </div>
+                <div className="">
+                  <div className="font-bold">{topUpUser.name}</div>
+                  <div className="text-xs text-gray-400 w-64 trunck-text">{topUpUser.email}</div>
+                </div>
+              </div>
+              <input type='hidden' name="user_id" value={topUpUser?.id} />
+              <AppInput name="amount" required type={"number"} label="Enter Amount" />
+              <div className="flex gap-3">
+                <button disabled={proccessing} className="flex-grow disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3"> {proccessing ? "Proccessing..." : "Top-Up Now"}</button>
+              </div>
+            </form>
+          </Modal>
+        )
+      }
+
+
+
       <div className="grid xl:grid-cols-3 gap-5">
         <div className="xl:col-span-2 space-y-5">
           <div className="grid sm:grid-cols-2 gap-5">
@@ -211,7 +261,13 @@ function Page() {
                         <div className="flex flex-col items-end sm:hidden gap-2">
                           <div className="flex-grow">
                             <div className={`text-[9px] px-3 inline py-[2px] rounded-lg bg-opacity-10 ${data.status === "active" ? "text-success bg-success" : "text-danger bg-danger"}`}>{data.status}</div>
-                          </div><div onClick={() => { setX(data) }} className="w-7 h-7 cursor-pointer rounded-md text-black flex items-center justify-center bg-gray-200 "><TbEye /></div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div onClick={() => { setX(data) }} className="w-7 h-7 cursor-pointer rounded-md text-black flex items-center justify-center bg-gray-200 ">
+                              <TbEye />
+                            </div>
+                            <div className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer" onClick={() => showTopUpForm(data)}>Top-up</div>
+                          </div>
                         </div>
                       </td>
                       <td className='px-3 py-2 text-left hidden sm:table-cell' scope="">{data.phone}</td>
@@ -220,7 +276,9 @@ function Page() {
                         <div className="flex items-center gap-3">
                           <div className="flex-grow">
                             <div className={`text-[9px] px-3 inline py-[2px] rounded-lg bg-opacity-10 ${data.status === "active" ? "text-success bg-success" : "text-danger bg-danger"}`}>{data.status}</div>
-                          </div> <div onClick={() => { setX(data) }} className="w-7 h-7 cursor-pointer rounded-md text-black flex items-center justify-center bg-gray-200 "><TbEye /></div>
+                          </div>
+                          <div onClick={() => { setX(data) }} className="w-7 h-7 cursor-pointer rounded-md text-black flex items-center justify-center bg-gray-200 "><TbEye /></div>
+                          <div className="bg-black text-white text-xs px-4 py-2 rounded-lg cursor-pointer" onClick={() => showTopUpForm(data)}>Top-up</div>
                         </div>
                       </td>
                     </tr>

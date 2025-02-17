@@ -60,6 +60,8 @@ export const changeAvatar = (formData) => apiWithAuth.post("admin/profile/change
 export const changeUserName = (formData) => apiWithAuth.post("admin/profile/update", formData).then(getApiResponse).catch(getErrorResponse);
 
 
+export const fundAUser = (formData) => apiWithAuth.post("admin/transaction/fund_user", formData).then(getApiResponse).catch(getErrorResponse);
+
 
 export const cryptoRevenue = (formData) => apiWithAuth.post("admin/summary/crypto_revenue", formData).then(getApiResponse).catch(getErrorResponse);
 export const giftcardRevenue = (formData) => apiWithAuth.post("admin/summary/giftcard_revenue", formData).then(getApiResponse).catch(getErrorResponse);

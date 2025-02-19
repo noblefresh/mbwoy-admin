@@ -6,26 +6,28 @@ import LineChart from '@/app/components/organisms/LineChart'
 import { IoMdArrowDropdown } from "react-icons/io";
 import Link from 'next/link'
 import PieChart from '@/app/components/organisms/PieChart'
-import { dashboardSummary } from '@/app/services/authService'
+import { dashboardSummary, topusersDays } from '@/app/services/authService'
 import TopUsers from '@/app/components/organisms/TopUsers'
+import TopUsersDays from '@/app/components/organisms/TopUsersDays'
 
 function Page() {
-  const [summary , setSummary] = useState([])
+  const [summary, setSummary] = useState([])
+  const [summaryDays, setSummaryDays] = useState([])
   const [showOption, setShowOption] = useState(false)
   const [option, setOption] = useState("Transactions")
 
 
   const fetchSummary = async () => {
-    const {status,data} = await dashboardSummary().catch(err => console.log(err))
+    const { status, data } = await dashboardSummary().catch(err => console.log(err))
     if (status) {
-      setSummary(data.data);      
+      setSummary(data.data);
     }
   }
 
   useEffect(() => {
     fetchSummary()
   }, [])
-  
+
 
   return (
     <AppLayout title={"Here`s the summary of all activities"}>
@@ -51,7 +53,10 @@ function Page() {
             </div>
             <div className="h-64 md:h-96"><LineChart /></div>
           </div>
-          <TopUsers extar />
+          <div className="grid md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-5">
+            <TopUsers extar />
+            <TopUsersDays />
+          </div>
         </div>
         <div className="space-y-5">
           <div className="space-y-2 bg-white rounded-lg px-4 py-4">

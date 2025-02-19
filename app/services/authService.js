@@ -53,11 +53,13 @@ export const transactionsWithdrawalSummary = (formData) => apiWithAuth.post("adm
 export const cryptoOrderSummary = (formData) => apiWithAuth.post("admin/summary/crypto_orders", formData).then(getApiResponse).catch(getErrorResponse);
 export const giftcardOrderSummary = (formData) => apiWithAuth.post("admin/summary/giftcard_orders", formData).then(getApiResponse).catch(getErrorResponse);
 export const topusers = (formData) => apiWithAuth.post("admin/summary/topusers", formData).then(getApiResponse).catch(getErrorResponse);
+export const topuserDays = (formData) => apiWithAuth.post("admin/summary/topusers_30days", formData).then(getApiResponse).catch(getErrorResponse);
 
 export const fetchNotification = (formData) => apiWithAuth.post("admin/profile/fetch_notifications", formData).then(getApiResponse).catch(getErrorResponse);
 export const changePassword = (formData) => apiWithAuth.post("admin/profile/update_password", formData).then(getApiResponse).catch(getErrorResponse);
 export const changeAvatar = (formData) => apiWithAuth.post("admin/profile/change_avatar", formData).then(getApiResponse).catch(getErrorResponse);
 export const changeUserName = (formData) => apiWithAuth.post("admin/profile/update", formData).then(getApiResponse).catch(getErrorResponse);
+
 
 
 export const fundAUser = (formData) => apiWithAuth.post("admin/transaction/fund_user", formData).then(getApiResponse).catch(getErrorResponse);

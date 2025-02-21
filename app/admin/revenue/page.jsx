@@ -58,10 +58,10 @@ function Page() {
   return (
     <AppLayout title={"Summary on all transactions"}>
       <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        <AppCard withNairaSign figure={summary?.crypto?.all?.success_orders} icon={<LuCoins />} color="text-[#acb452]" text="Successful Crypto Orders" bg="bg-[#acb452]" />
-        <AppCard withNairaSign figure={summary?.giftCard?.all?.success_orders} icon={<TbReportSearch />} color="text-[#ffac14]" text="Successful Gift card orders" bg="bg-[#ffac14]" />
-        <AppCard withNairaSign figure={summary?.transaction?.all?.total_payment} icon={<GiPayMoney />} color="text-[#7329a4]" text="Successful Transaction" bg="bg-[#7329a4]" />
-        <AppCard withNairaSign figure={summary?.transaction?.all?.total_debit} icon={<FcDebt />} color="text-[#ef4444]" text="debts" bg="bg-[#ef4444]" />
+        <AppCard withNairaSign figure={activeTab === "all" ? summary?.crypto?.all?.success_orders : activeTab === "daily" ? summary?.crypto?.daily?.daily_success_orders : activeTab === "weekly" ?summary?.crypto?.weekly?.weekly_success_orders : summary?.crypto?.monthly?.monthly_success_orders} icon={<LuCoins />} color="text-[#acb452]" text="Successful Crypto Orders" bg="bg-[#acb452]" />
+        <AppCard withNairaSign figure={activeTab === "all" ? summary?.giftCard?.all?.success_orders : activeTab === "daily" ? summary?.giftCard?.daily?.daily_success_orders : activeTab === "weekly" ? summary?.giftCard?.weekly?.weekly_success_orders : summary?.giftCard?.monthly?.monthly_success_orders} icon={<TbReportSearch />} color="text-[#ffac14]" text="Successful Gift card orders" bg="bg-[#ffac14]" />
+        <AppCard withNairaSign figure={activeTab === "all" ? summary?.transaction?.all?.total_payment : activeTab === "daily" ? summary?.transaction?.daily?.daily_success_payment : activeTab === "weekly" ? summary?.transaction?.weekly?.weekly_success_payment : summary?.transaction?.monthly?.monthly_success_payment} icon={<GiPayMoney />} color="text-[#7329a4]" text="Successful Transaction" bg="bg-[#7329a4]" />
+        <AppCard withNairaSign figure={activeTab === "all" ? summary?.transaction?.all?.total_debit : activeTab === "daily" ? summary?.transaction?.daily?.daily_success_debit : activeTab === "weekly" ? summary?.transaction?.weekly?.weekly_success_debit : summary?.transaction?.monthly?.monthly_success_debit} icon={<FcDebt />} color="text-[#ef4444]" text="debts" bg="bg-[#ef4444]" />
       </div>
       <div className="flex justify-end">
         <div onClick={() => setActiveTab("all")} className={`px-5 py-2 cursor-pointer text-sm rounded-lg ${activeTab === "all" ? "bg-black text-white" : "hover:bg-gray-100"}`}>All</div>

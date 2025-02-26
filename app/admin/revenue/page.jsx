@@ -74,6 +74,7 @@ function Page() {
           <div className="p-5 font-bold text-lg">Crypto Transaction Summary</div>
           <div className="">
             {
+              
               !loading && (
                 activeTab === "all" ? <PieChart series={[summary?.crypto?.all?.success_orders, summary?.crypto?.all?.rejected_orders]} labels={["Total Payment", "Total Debt"]} /> :
                   activeTab === "daily" ? <PieChart series={[summary?.crypto?.daily?.daily_success_orders, summary?.crypto?.daily?.daily_rejected_orders]} labels={["Total Payment", "Total Debt"]} /> :

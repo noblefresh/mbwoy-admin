@@ -13,6 +13,7 @@ import axios from 'axios'
 import { API_BASE_URL, TOKEN } from '@/app/services/httpService'
 import { MdOutlineFileCopy } from 'react-icons/md'
 import Image from 'next/image'
+import Link from 'next/link'
 
 function Page() {
   const [loading, setLoading] = useState(true)
@@ -92,11 +93,14 @@ function Page() {
               <div className='space-y-5'>
                 <div className="text-xl font-bold">Order Infomation</div>
                 {
-                  x?.images !== null && (
-                    <div className="h-72 bg-gray-50 rounded-md overflow-hidden">
-                      <img src={x?.images[0]} className='h-full' />
-                    </div>
-                  )
+                  x?.images !== null && x?.images.map((e, i) => (
+                    <Link href={e} key={i} target='_blank'>
+                      <div className="h-72 bg-gray-50 rounded-md overflow-hidden">
+                        <img src={e} className='h-full' />
+                      </div>
+                    </Link>
+
+                  ))
                 }
 
                 {
